@@ -88,9 +88,11 @@ Assumption Reading: Read amount of the both meters at the same time and publish 
 Assumption Comsuming: Consumer save published time, meter of MeterA, meter of MeterB, Sum(MeterA + MeterB), Generated exlectrricity from PV (in KWH * 10, scaled for better comparison) for each publication for more fine time scale than publisher.
 
 Reading MeterA and MeterB in simple piecewise linear value with randam fluctuation RDelta in Publisher.
+![Alt text](simple_meter.png)
 From MeterA and MeterB with Rerading time, construct Sum and PV Power generation with finer time difference CDelta in Consumer.
 The data are stored in csv file (./Images/power.csv) format because we need to append date for each reading time.
-After given ending time, consumer plot the data according to time in ./Images/fig_power.png. 
+After given ending time, consumer plot the data according to time in ./Images/fig_power.png.
+![Alt text](fig_power_simple.png)
 
 ## After finish consuming messages, one have to stop Consumer in this test
 

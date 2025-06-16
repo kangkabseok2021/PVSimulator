@@ -59,6 +59,7 @@ class Consumer:
             ddf = pd.read_csv(outfile)
             print(ddf)
             ddf.plot(x='time', y = ['MeterA', 'MeterB', 'Sum', 'PowerG'])
+            plt.gcf().autofmt_xdate()
             plt.savefig("./Images/fig_power.png")
 
 
