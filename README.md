@@ -15,24 +15,24 @@ To run this project, you will need the following:
 
 ## Setup
 
-### Activate the virtual environment:
+### Activate the virtual environment: You can use your own virtual environment
 
-1. **Create the virtual environment:**
+1. Create the virtual environment:**
 
     ```sh
     python -m venv .venv
     ```
 
-2. **Activate the virtual environment:**
+2. Activate the virtual environment:**
     - On Windows:
 
-        ```sh
+        ```bash
         .venv\Scripts\activate
         ```
 
     - On macOS/Linux:
 
-        ```sh
+        ```bsash
         source .venv/bin/activate
         ```
 
@@ -40,20 +40,22 @@ To run this project, you will need the following:
 
 1. **Install the required Python packages:**
 
-    ```sh
+    ```bash
     pip install -r requirements.txt
     ```
 
-## Run RabbiMQ Message broker for python: based https://github.com/pazfelipe/python-rabbitmq.git 
+## Run RabbiMQ Message broker for python: 
+
+Based https://github.com/pazfelipe/python-rabbitmq.git 
 
     Run the RabbitMQ container using Docker Compose:
     ```bash
     docker compose -f compose_files/rabbitmq-python.yaml up -d
-    ````
+    ```
     Close Container :
     ```bash
     docker compose -f compose_files/rabbitmq-python.yaml down
-    ````
+    ```
 ### Note
 
 The RabbitMQ management console can be accessed at [http://localhost:15672](http://localhost:15672).
@@ -61,7 +63,7 @@ The RabbitMQ management console can be accessed at [http://localhost:15672](http
 ## Define Publisher classes in src/publisher.py
 ### Publish a message
 
-1. **Run the publisher script to publish a test message:**
+1. Run the publisher script to publish a test message:
 
     ```sh
     python3 src/publisher.py
@@ -70,7 +72,7 @@ The RabbitMQ management console can be accessed at [http://localhost:15672](http
 ## Define Consumer classes in src/consumer.py
 ### Consuming messages
 
-1. Run the consumer script to consume and save test messages: May create Images directory with 
+1. Run the consumer script to consume and save test messages: May need to create Images directory with 
     ```basg
     mkdir Images (in PVSimulator)
     ```
@@ -115,14 +117,14 @@ Cunsumer is waiting to publish messages until error or Keystroke to stop waiting
 
     ```bash
     docker build -t pv-simulator .
-    ````
+    ```
 
 ## Run the RabbitMQ container using Docker Compose: In PVSimulator
     ```bash
     docker compose -f compose_files/rabbitmq-python.yaml up -d
-    ````
+    ```
 
-## Run conrtainer: Run mkdir Images In PVSimulator if it needed
+## Run conrtainer: Run mkdir Images In PVSimulator if it needed. Save data in Images directory which is left after stop container.
 
     ```bash
     docker container run --network host -it -v ./Images:/PVSimulator/Images pv-simultor bash
