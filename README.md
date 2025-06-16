@@ -68,10 +68,13 @@ The RabbitMQ management console can be accessed at [http://localhost:15672](http
     ```
 
 ## Define Consumer classes in src/consumer.py
-### Consume messages
+### Consuming messages
 
-1. **Run the consumer script to consume and save test messages:**
-
+1. Run the consumer script to consume and save test messages: May create Images directory with 
+    ```basg
+    mkdir Images (in PVSimulator)
+    ```
+    Then run
     ```sh
     python3 src/consumer.py
     ```
@@ -82,7 +85,12 @@ For simulation reading meters, I assume that MeterA is the amount of electricity
 so the usage of house is the summation of MeterA and MeterB.
 
 Assumption Reading: Read amount of the both meters at the same time and publish which may be different time differences.
-Assumption Comsuming: Consumer save published time, meter of MeterA, meter of MeterB, Sum(MeterA + MeterB), Generated exlectrricity from PV (in KWH, scaled for better comparison) for each publication for more fine time scale than publisher.
+Assumption Comsuming: Consumer save published time, meter of MeterA, meter of MeterB, Sum(MeterA + MeterB), Generated exlectrricity from PV (in KWH * 10, scaled for better comparison) for each publication for more fine time scale than publisher.
+
+Reading MeterA and MeterB in simple piecewise linear value with randam fluctuation RDelta in Publisher.
+From MeterA and MeterB with Rerading time, construct Sum and PV Power generation with finer time difference CDelta in Consumer.
+The data are stored in csv file (./Images/power.csv) format because we need to append date for each reading time.
+After given ending time, consumer plot the data according to time in ./Images/fig_power.png. 
 
 ## After finish consuming messages, one have to stop Consumer in this test
 

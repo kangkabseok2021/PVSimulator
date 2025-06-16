@@ -52,14 +52,15 @@ class Consumer:
                                     columns=['time', 'MeterA', 'MeterB', 'Sum', 'PowerG'])
                 df_exist = True
             self.last_time = self.end_time
-        print(df)
+        #print(df)
 
         df.to_csv(outfile, mode='a', index=False, header=False)
         if self.last_time == self.end_time:
             ddf = pd.read_csv(outfile)
             print(ddf)
             ddf.plot(x='time', y = ['MeterA', 'MeterB', 'Sum', 'PowerG'])
-            plt.savefig("fig_power.png")
+            plt.savefig("./Images/fig_power.png")
+
 
     def call_consume(self, ch, method, properties, body):
         after_Meter = json.loads(body.decode('utf-8'))
@@ -104,7 +105,7 @@ if __name__ == "__main__":
     start_time = datetime(2025,6,13, 0, 0, 0)
     cTime = start_time - timedelta(seconds=60)
     end_time = datetime(2025,6,14, 0, 0, 0)
-    outfile = "power.csv"
+    outfile = "./Images/power.csv"
     consumer_m = Consumer("meter_queue", start_time, end_time, 60, outfile)
     consumer_m.consumer()
 
