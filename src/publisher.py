@@ -20,7 +20,7 @@ def ReadingMeterB(stime):
     return x;
 
 def ReadingMeters(stime):
-    ctime = stime + random.randrange(0,200) - 100
+    ctime = stime + random.randrange(0,300) - 150
     xA = ReadingMeterA(ctime)
     xB = ReadingMeterB(ctime)
     return xA-xB, xB
@@ -84,7 +84,7 @@ def publish_test_message():
 
 if __name__ == "__main__":
     cTime = datetime(2025,6,13, 0, 0, 0) - timedelta(seconds=60)
-    publish_meter = Publisher("meter_queue", cTime, datetime(2025,6,14, 0, 0, 0), 600)
+    publish_meter = Publisher("meter_queue", cTime, datetime(2025,6,14, 0, 0, 0), 1200)
     publish_meter.publish()
 
     #publish_test_message()

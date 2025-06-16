@@ -73,7 +73,7 @@ The RabbitMQ management console can be accessed at [http://localhost:15672](http
 1. **Run the consumer script to consume and save test messages:**
 
     ```sh
-    python3 src/publisher.py
+    python3 src/consumer.py
     ```
 
 # Replication Meter data
@@ -84,8 +84,6 @@ so the usage of house is the summation of MeterA and MeterB.
 Assumption Reading: Read amount of the both meters at the same time and publish which may be different time differences.
 Assumption Comsuming: Consumer save published time, meter of MeterA, meter of MeterB, Sum(MeterA + MeterB), Generated exlectrricity from PV (in KWH, scaled for better comparison) for each publication for more fine time scale than publisher.
 
-Pictures
-
 ## After finish consuming messages, one have to stop Consumer in this test
 
 Cunsumer is waiting to publish messages until error or Keystroke to stop waiting
@@ -93,5 +91,28 @@ Cunsumer is waiting to publish messages until error or Keystroke to stop waiting
 ## Further modification: Wait more messages or spend time before consume messages
 
 
-# Running with Container: To Do
-Prepare yaml 
+# Running with Container:
+## Clone PVSimulator from github
+
+    ```bash
+    git clone https://github.com/kangkabseok2021/PVSimulator.git 
+    ```
+
+## Docker Build: In PVSimulator
+
+    ```bash
+    docker build -t pv-simulator .
+    ````
+
+## Run the RabbitMQ container using Docker Compose: In PVSimulator
+    ```bash
+    docker compose -f compose_files/rabbitmq-python.yaml up -d
+    ````
+
+## Run conrtainer: Run mkdir Images In PVSimulator if it needed
+
+    ```bash
+    docker container run --network host -it -v ./Images:/PVSimulator/Images pv-simultor bash
+    ```
+
+### Run publisher and consumer inside container: Need to stop consumer manually
